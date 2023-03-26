@@ -166,23 +166,23 @@ height:100%;
 		if ($conn->connect_error) {
                 	die("Connection Failed: ". $connect_error);
 				}
-		$sql  = "SELECT `title`, articleID, SUBSTRING(`body`, 1, 400) AS body,`pubDate`, Authors.name AS author, Articles.imgloc AS imgsrc \n"
+//		$sql  = "SELECT `title`, articleID, SUBSTRING(`body`, 1, 400) AS body,`pubDate`, Authors.name AS author, Articles.imgloc AS imgsrc \n"
 
-    		. "FROM `Articles` \n"
+  //  		. "FROM `Articles` \n"
 
-    		. "JOIN fingerlakes2.Authors WHERE Authors.authorID = Articles.authorID \n"
+    //		. "JOIN fingerlakes2.Authors WHERE Authors.authorID = Articles.authorID \n"
 
-		."ORDER BY Articles.pubDate DESC";
+//		."ORDER BY Articles.pubDate DESC";
 
-	//	$sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 400) AS body, Articles.pubDate, Articles.imgloc AS imgsrc, Authors.name, coms FROM Articles\n"
+		$sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 400) AS body, Articles.pubDate, Articles.imgloc AS imgsrc, Authors.name, coms FROM Articles\n"
 
-      //              . " INNER JOIN Authors ON Authors.authorID = Articles.authorID\n"
+                    . " INNER JOIN Authors ON Authors.authorID = Articles.authorID\n"
 
-    //                . "    INNER JOIN"
+                    . "    INNER JOIN"
 
-  //                  . "(SELECT Comments.articleID, COUNT(DISTINCT Comments.commentID) AS coms FROM Comments GROUP BY articleID ORDER BY articleID DESC) co ON Articles.articleID = co.articleID  \n"
+                    . "(SELECT Comments.articleID, COUNT(DISTINCT Comments.commentID) AS coms FROM Comments GROUP BY articleID ORDER BY articleID DESC) co ON Articles.articleID = co.articleID  \n"
 
-//                    . "ORDER BY `Articles`.`articleID`  DESC";
+                    . "ORDER BY `Articles`.`articleID`  DESC";
 
 		$result = $conn->query($sql);
 
