@@ -141,7 +141,7 @@ height:100%;
 		?>
 	</div> <!--/*end loglink div*/-->
 
-	<div class="header">
+	<div class="header">hehhe
 		<div class="bannerwrap"><img src="genImages/fingerlakesbanner.png" alt="Finger Lakes 2" style="width:95%"></div>
 
 	<div class="tabwrap">
