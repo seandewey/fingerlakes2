@@ -144,7 +144,7 @@ height:100%;
 
 	<div class="header">
 		<div class="bannerwrap">
-			<img src="fingerlakesbanner.png" alt="Finger Lakes 2" style="width:95%">
+			<img src="genImages/fingerlakesbanner.png" alt="Finger Lakes 2" style="width:95%">
 		</div>
 		<div class="tabwrap">
 			<button class="tablink" onclick="location.href='index.php'">Home</button>
