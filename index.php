@@ -217,7 +217,7 @@ height:100%;
                        }
 
 ?>
-//</div> <!--end of b--> B originally ended before authors but i am moving B and A to contain both superwrap and authors 3/25/23-
+
 </div> <!--end of articles-->
 
 <div id="Authors" class="superwrap">
