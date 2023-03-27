@@ -167,15 +167,49 @@ height:100%;
                 	die("Connection Failed: ". $connect_error);
 				}
 
-		$sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 400) AS body, Articles.pubDate, Articles.imgloc AS imgsrc, Authors.name, coms FROM Articles\n"
+$sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 400) AS body, Articles.pubDate, Articles.imgloc AS imgsrc, Authors.name, coms FROM Articles\n"
 
-                    . " INNER JOIN Authors ON Authors.authorID = Articles.authorID\n"
+    . "\n"
 
-                    . "    INNER JOIN"
+    . "INNER JOIN Authors ON Authors.authorID = Articles.authorID\n"
 
-                    . "(SELECT Comments.articleID, COUNT(DISTINCT Comments.commentID) AS coms FROM Comments GROUP BY articleID ORDER BY articleID DESC) co ON Articles.articleID = co.articleID  \n"
+    . "\n"
 
-                    . "ORDER BY `Articles`.`articleID`  DESC";
+    . "INNER JOIN\n"
+
+    . "\n"
+
+    . "(SELECT Articles.articleID, COUNT(DISTINCT Comments.commentID) AS coms\n"
+
+    . "FROM Articles LEFT JOIN Comments on Articles.articleID = Comments.articleID\n"
+
+    . "GROUP BY articleID\n"
+
+    . "ORDER BY ArticleID DESC) co ON Articles.articleID = co.articleID \n"
+
+    . "\n"
+
+    . "ORDER BY `Articles`.`articleID`  DESC";
+
+	//	$sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 400) AS body, Articles.pubDate, Articles.imgloc AS imgsrc, Authors.name, coms FROM Articles\n"
+
+      //              . " INNER JOIN Authors ON Authors.authorID = Articles.authorID\n"
+
+    //                . "    INNER JOIN"
+
+  //                  . "(SELECT Comments.articleID, COUNT("
+
+//		    . "SELECT Articles.articleID, COUNT(DISTINCT Comments.commentID) AS coms\n"
+
+   // . "FROM Articles LEFT JOIN Comments on Articles.articleID = Comments.articleID\n"
+
+    //. "GROUP BY articleID\n"
+
+  //  . "ORDER BY ArticleID DESC"
+
+//		    . ") co ON Articles.articleID = co.articleID  \n"
+
+//                    . "ORDER BY `Articles`.`articleID`  DESC";
 
 		$result = $conn->query($sql);
 
