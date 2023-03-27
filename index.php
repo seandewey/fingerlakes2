@@ -64,7 +64,7 @@ overflow: hidden;
 }
 div.commwrap{
 //border: 1px solid blue;
-width:4%; //set to 4% when working on picture thing
+width:4%;
 height:120px;
 position: absolute;
 right: 1%;
@@ -135,20 +135,17 @@ height:100%;
 		print '<meta name="og:creator" content="@FingerLakesTwo">';/*done*/
 		print '<meta name="og:title" content="Your Number 1 Stop for Finger Lakes Region">';/*done*/
 		print '<meta name="og:image" content="http://fingerlakes2.com/fingerlakesbanner.png">';
-
-
-
 		?>
 	</div> <!--/*end loglink div*/-->
 
 	<div class="header">
 		<div class="bannerwrap"><img src="genImages/fingerlakesbanner.png" alt="Finger Lakes 2" style="width:95%"></div>
 
-	<div class="tabwrap">
-	<button class="tablink" onclick="openPage(event, 'articles')" id="defaultOpen">Home</button>
-        <button class="tablink" onclick="openPage(event, 'Authors')">Authors</button>
+		<div class="tabwrap">
+			<button class="tablink" onclick="openPage(event, 'articles')" id="defaultOpen">Home</button>
+        		<button class="tablink" onclick="openPage(event, 'Authors')">Authors</button>
 
-	</div>
+		</div><!--end of tab-->
 	</div> <!--/*end header div */-->
 
 
@@ -167,49 +164,20 @@ height:100%;
                 	die("Connection Failed: ". $connect_error);
 				}
 
-$sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 400) AS body, Articles.pubDate, Articles.imgloc AS imgsrc, Authors.name, coms FROM Articles\n"
+	$sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 400) AS body, Articles.pubDate, Articles.imgloc AS imgsrc, Authors.name, coms FROM Articles\n"
 
-    . "\n"
+	    . "INNER JOIN Authors ON Authors.authorID = Articles.authorID\n"
 
-    . "INNER JOIN Authors ON Authors.authorID = Articles.authorID\n"
+	    . "INNER JOIN\n"
 
-    . "\n"
+	    . "(SELECT Articles.articleID, COUNT(DISTINCT Comments.commentID) AS coms\n"
 
-    . "INNER JOIN\n"
+	    . "FROM Articles LEFT JOIN Comments on Articles.articleID = Comments.articleID\n"
 
-    . "\n"
+	    . "GROUP BY articleID) co ON Articles.articleID = co.articleID \n"
 
-    . "(SELECT Articles.articleID, COUNT(DISTINCT Comments.commentID) AS coms\n"
+	    . "ORDER BY `Articles`.`articleID`  DESC";
 
-    . "FROM Articles LEFT JOIN Comments on Articles.articleID = Comments.articleID\n"
-
-    . "GROUP BY articleID\n"
-
-    . "ORDER BY ArticleID DESC) co ON Articles.articleID = co.articleID \n"
-
-    . "\n"
-
-    . "ORDER BY `Articles`.`articleID`  DESC";
-
-	//	$sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 400) AS body, Articles.pubDate, Articles.imgloc AS imgsrc, Authors.name, coms FROM Articles\n"
-
-      //              . " INNER JOIN Authors ON Authors.authorID = Articles.authorID\n"
-
-    //                . "    INNER JOIN"
-
-  //                  . "(SELECT Comments.articleID, COUNT("
-
-//		    . "SELECT Articles.articleID, COUNT(DISTINCT Comments.commentID) AS coms\n"
-
-   // . "FROM Articles LEFT JOIN Comments on Articles.articleID = Comments.articleID\n"
-
-    //. "GROUP BY articleID\n"
-
-  //  . "ORDER BY ArticleID DESC"
-
-//		    . ") co ON Articles.articleID = co.articleID  \n"
-
-//                    . "ORDER BY `Articles`.`articleID`  DESC";
 
 		$result = $conn->query($sql);
 
@@ -244,7 +212,7 @@ $sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 
                        }
 
 ?>
-
+//</div>
 </div> <!--end of articles-->
 
 <div id="Authors" class="superwrap">
@@ -322,6 +290,5 @@ document.getElementById(Choice).style.display = "block";
 
 document.getElementById("defaultOpen").click();
 
-</script>
-<!--/*end of Javascript Functions*/-->
+</script> <!--/*end of Javascript Functions*/-->
 </html>
