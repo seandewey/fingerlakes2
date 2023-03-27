@@ -166,13 +166,6 @@ height:100%;
 		if ($conn->connect_error) {
                 	die("Connection Failed: ". $connect_error);
 				}
-//		$sql  = "SELECT `title`, articleID, SUBSTRING(`body`, 1, 400) AS body,`pubDate`, Authors.name AS author, Articles.imgloc AS imgsrc \n"
-
-  //  		. "FROM `Articles` \n"
-
-    //		. "JOIN fingerlakes2.Authors WHERE Authors.authorID = Articles.authorID \n"
-
-//		."ORDER BY Articles.pubDate DESC";
 
 		$sql  = "SELECT Articles.title, Articles.articleID, SUBSTRING(Articles.body, 1, 400) AS body, Articles.pubDate, Articles.imgloc AS imgsrc, Authors.name, coms FROM Articles\n"
 
