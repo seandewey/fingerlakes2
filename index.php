@@ -212,7 +212,7 @@ height:100%;
                        }
 
 ?>
-//</div>
+</div>
 </div> <!--end of articles-->
 
 <div id="Authors" class="superwrap">
